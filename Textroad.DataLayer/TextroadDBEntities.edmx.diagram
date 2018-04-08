@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2384e3f45448464b92cf9252952e1b2c" Name="Diagram1" ZoomLevel="47">
+        <EntityTypeShape EntityType="Textroad.DataLayer.ConferenceManuscript" Width="1.5" PointX="5.25" PointY="29" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.Country" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.Decision" Width="1.5" PointX="6" PointY="49.125" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.EditoralBoard" Width="1.5" PointX="8.25" PointY="19.125" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.EditorBoardPosition" Width="1.5" PointX="6" PointY="31.875" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.Email" Width="1.5" PointX="11.25" PointY="8.125" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.EmailAlert" Width="1.5" PointX="5.25" PointY="26" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.Guest" Width="1.5" PointX="0.75" PointY="2.25" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.GuestEditor" Width="1.5" PointX="10.5" PointY="15.625" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.InvitationTemplate" Width="1.5" PointX="2.75" PointY="2.25" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.Journal" Width="1.5" PointX="3" PointY="16.375" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.JournalReviewer" Width="1.5" PointX="5.25" PointY="22.625" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.JournalScope" Width="1.5" PointX="5.25" PointY="19.375" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.JournalSponsor" Width="1.5" PointX="8.25" PointY="15" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.MainPage" Width="1.5" PointX="0.75" PointY="5.25" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.ManuscriptAuthor" Width="1.5" PointX="11.25" PointY="18.75" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.ManuscriptPhase" Width="1.5" PointX="6" PointY="46" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.ManuscriptPhaseDecision" Width="1.5" PointX="8.25" PointY="8.375" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.ManuscriptReview" Width="1.5" PointX="2.75" PointY="5.25" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.ManuscriptStatus" Width="1.5" PointX="10.75" PointY="12.25" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.ManuscriptUser" Width="1.5" PointX="11.25" PointY="22.875" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.OpenSpecialIssue" Width="1.5" PointX="5.25" PointY="43" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.Person" Width="1.5" PointX="15" PointY="2.5" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.PublishPeriod" Width="1.5" PointX="0.75" PointY="15.375" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.RelationalJournal" Width="1.5" PointX="5.25" PointY="37.375" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.Reviewer" Width="1.5" PointX="3" PointY="33.375" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.Scope" Width="1.5" PointX="3" PointY="9.25" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.SL_ActionLog" Width="1.5" PointX="12.75" PointY="12.25" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.SL_ErrorLog" Width="1.5" PointX="13.75" PointY="7.25" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.Sponsor" Width="1.5" PointX="6" PointY="11.25" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.Subject" Width="1.5" PointX="0.75" PointY="19.25" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.Title" Width="1.5" PointX="12.75" PointY="3.375" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.ManuscriptView" Width="1.5" PointX="15.75" PointY="7.25" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_EditoralBoard_Countries" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_Emails_Countries" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_ManusriptAuthors_Countries" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_ManuscriptPhaseDecision_Decision" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_EditoralBoard_EditorBoardPosition" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_EditoralBoard_Journals" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_Emails_Scope" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_EmailAlert_Journals" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_JournalReviewers_Journals" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_Journals_PublishPeriod" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_Journals_Subjects" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_JournalScope_Journals" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_JournalSponsor_Journals" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_OpenSpecialIssues_Journals" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_RelationJournal_Journals" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_SS_RELATION_JOURNAL_SS_JOURNAL" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_JournalReviewers_Reviewers" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_JournalScope_Scope" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_JournalSponsor_Sponsors" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_ManuscriptPhaseDecision_ManuscriptPhase" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_Person_Title" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.JournalVolumeType" Width="1.5" PointX="17.375" PointY="1" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.JournalVersion" Width="1.5" PointX="19.625" PointY="10.875" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_GuestEditors_JournalVersions" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_JournalVersions_Journals" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_JournalVersions_JournalVolumeType" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.JournalVersionView" Width="1.5" PointX="16.375" PointY="14.75" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.JournalView" Width="1.5" PointX="18.375" PointY="15.75" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.News" Width="1.5" PointX="15.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.Conference" Width="1.5" PointX="3" PointY="26.375" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.ConferenceView" Width="1.5" PointX="18.375" PointY="4.75" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_ConferenceArticles_Conferences" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_Conferences_Subjects" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.ManuscriptType" Width="1.5" PointX="8.375" PointY="0.875" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.Manuscript" Width="1.5" PointX="0.75" PointY="29.375" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_ConferenceArticles_ManuScript" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_ManuscriptPhase_ManuScript" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_ManuscriptUser_ManuScript" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_ManusriptAuthors_ManuScript" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.ManuscriptCharge" Width="1.5" PointX="13.625" PointY="21.75" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_ArticlesCharge_Journals" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_ArticlesCharge_ManuscriptType" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.ArticleType" Width="1.5" PointX="20.375" PointY="2.5" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.Author" Width="1.5" PointX="22.625" PointY="7.875" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.PublishArticleAuthor" Width="1.5" PointX="24.875" PointY="2.125" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.PublishArticleScope" Width="1.5" PointX="24.875" PointY="6.625" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.PublishedArticle" Width="1.5" PointX="22.625" PointY="1" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_PublishedArticle_ArticleType" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_Authors_Countries" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_GuestEditors_Authors" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_PublishArticleAuthor_Author" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_PublishArticleAuthor_PublishedArticle" />
+        <AssociationConnector Association="Textroad.DataLayer.FK_PublishArticleScope_PublishedArticle" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.UserView" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="Textroad.DataLayer.PublishedArticleView" Width="1.5" PointX="20.375" PointY="15.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

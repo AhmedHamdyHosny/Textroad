@@ -1,0 +1,87 @@
+﻿@using Textroad.Models
+@using BeyondThemes.Bootstrap;
+@model LoginViewModel
+@{
+    Layout = "~/Views/Shared/_Empty.cshtml"; ;
+}
+
+<style>
+    .login-container .loginbox .loginbox-remember
+    {
+        padding: 5px 40px;
+    }
+
+   
+</style>
+
+@{
+     Html.EnableClientValidation(); 
+}
+
+<div class="modal-body">
+    <div class="login-container animated fadeIn" >
+        <div class="loginbox bg-white">
+            <div class="loginbox-title">@Resources.Resource.SingIn</div>
+            @{
+                if (ViewBag.Error != null)
+                {
+                    using (Html.Bootstrap().Begin(new Alert().HtmlAttributes(new { id = "alert" }).Style(AlertColor.Error).Closeable()))
+                    {
+                        <i class="fa-fw fa fa-times"></i><span>@ViewBag.Error</span>
+                    }
+                }
+            }
+            @*@Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                <div class="loginbox-or">
+                    <div class="or-line"></div>
+                    <div class="or">OR</div>
+                </div>*@
+            @using (var form = Html.Bootstrap().Begin(new Form().Type(FormType.Vertical).HtmlAttributes(new { @id="signupForm"})))
+            {
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.AntiForgeryToken()
+                <div class="loginbox-textbox">
+                    @Html.Bootstrap().TextBoxFor(t => t.Email).Placeholder(Resources.Resource.Email).HtmlAttributes(new { @ng_model = "user.Email" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="loginbox-textbox">
+                    @Html.Bootstrap().PasswordFor(t => t.Password).Placeholder(Resources.Resource.Password).HtmlAttributes(new { @ng_model = "user.Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="loginbox-remember">
+                    @Html.Bootstrap().CheckBoxFor(t => t.RememberMe).HtmlAttributes(new { @class = "checkbox-slider  colored-blue", @ng_model = "user.RememberMe" })
+                </div>
+                <div class="loginbox-forgot">
+                    <a href="javascript:avoid(0);">@Resources.Resource.ForgetPassword</a>
+                </div>
+                <div class="loginbox-submit">
+                    @*<button class="btn btn-block btn-primary" ng-click="login()">@Resources.Resource.Login</button>*@
+                    @Html.Bootstrap().SubmitButton().Text(Resources.Resource.Login).Color(BootstrapColors.Primary).ButtonBlock()
+                </div>
+                <div class="loginbox-signup">
+                    @Html.ActionLink(Resources.Resource.SignUpWithEmail, "Register", "Account")
+                </div>
+                    }
+        </div>
+        <div class="logobox">
+            
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+   <script src="~/Content/js/1.custom-js/Utilities/Utility.js"></script>
+    <script>
+        $(document).ready(function () {
+            showAlert();
+            $('#signupForm').submit(function (event) {
+                if (!$('#signupForm').valid()) {
+                    event.preventDefault();
+                }
+            });
+        });
+        
+    </script>
+}

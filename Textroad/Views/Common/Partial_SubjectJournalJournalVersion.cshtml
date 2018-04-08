@@ -1,0 +1,51 @@
+﻿@using Classes.Helper;
+@using Classes.Common;
+@using Newtonsoft.Json;
+@{ 
+    PartialParamters.Subject subject = ViewBag.Subject;
+    PartialParamters.Journal journal = ViewBag.Journal ;
+    PartialParamters.JournalVersion journalVersion = ViewBag.JournalVersion;
+}
+
+<div >
+    @if (subject != null && subject.Show)
+    {
+        <script>
+            var subject = @Html.Raw(JsonConvert.SerializeObject(subject));
+        </script>
+        @Html.Label(subject.ControlName, subject.LabelText, htmlAttributes: new { @class = "text-info" })
+        <div custom-select="item.Value as item.Text for item in subjects | filter: $searchTerm" ng-init="bindSubject()" ng-model="@subject.AngularModel" ng-change="onSubjectChange()" autofocus></div>
+        if (subject.Required)
+        {
+            @Html.ValidationMessage(subject.ControlName, "", new { @class = "text-danger", @id = "SubjectID_Validation" })
+        }
+    }
+
+    @if (journal != null && journal.Show)
+    {
+        <script>
+            var journal = @Html.Raw(JsonConvert.SerializeObject(journal));
+        </script>
+        @Html.Label(journal.ControlName, journal.LabelText, htmlAttributes: new { @class = "text-info" })
+        <div custom-select="item.Value as item.Text for item in journals | filter: $searchTerm" ng-init="bindJournal()" ng-model="@journal.AngularModel" ng-change="onJournalChange()" autofocus></div>
+        if (journal.Required)
+        {
+            @Html.ValidationMessage(journal.ControlName, "", new { @class = "text-danger", @id = "JournalID_Validation" })
+        }
+    }
+
+    @if (journalVersion != null && journalVersion.Show)
+    {
+        <script>
+            var journalVersion = @Html.Raw(JsonConvert.SerializeObject(journalVersion));
+        </script>
+        @Html.Label(journalVersion.ControlName, journalVersion.LabelText, htmlAttributes: new { @class = "text-info" })
+        <div custom-select="item.Value as item.Text for item in journalVersions | filter: $searchTerm" ng-init="bindJournalVersion()" ng-model="@journalVersion.AngularModel" ng-change="onJournalVersionChange()" autofocus></div>
+        if (journalVersion.Required)
+        {
+            @Html.ValidationMessage(journalVersion.ControlName, "", new { @class = "text-danger", @id = "JournalVersionID_Validation" })
+        }
+    }
+
+</div>
+

@@ -1,0 +1,87 @@
+﻿@model Textroad.Models.JournalDetailsViewModel
+
+@{
+    ViewBag.Title = Resources.Administration.JournalDetails;
+    Layout = "~/Views/Shared/_Popup.cshtml";
+}
+
+<div class="modal-header">
+    <div class="widget-buttons pull-right">
+        <a href="javascript:void(0);" onclick="popupExpand(this)" data-toggle="maximize">
+            <i class="fa fa-expand"></i>
+        </a>
+        <a href="javascript:void(0);" ng-click="cancel()" data-toggle="dispose">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+    <h2 class="modal-title">@Resources.Administration.JournalDetails</h2>
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="modal-body withVScroll">
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.JournalName, Resources.Administration.JournalName, htmlAttributes: new { @class = "text-info" })
+                <label class="form-control">@(Model.JournalName ?? " ")</label>
+            </div>
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.SubjectName, Resources.Administration.SubjectName, htmlAttributes: new { @class = "text-info" })
+                <label class="form-control">@(Model.SubjectName ?? " ")</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.PublishPeriodName, Resources.Administration.PublishPeriodName, htmlAttributes: new { @class = "text-info" })
+                <label class="form-control">@(Model.PublishPeriodName ?? " ")</label>
+            </div>
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.NoView, Resources.Administration.NoView, htmlAttributes: new { @class = "text-info" })
+                <label class="form-control">@(Model.NoView.ToString() ?? " ")</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.ImpactFactor, Resources.Administration.ImpactFactor, htmlAttributes: new { @class = "text-info" })
+                <label class="form-control">@(Model.ImpactFactor.ToString() ?? " ")</label>
+            </div>
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.YearIssue, Resources.Administration.YearIssue, htmlAttributes: new { @class = "text-info" })
+                <label class="form-control">@(Model.YearIssue.ToString() ?? " ")</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.PrintISSN, Resources.Administration.PrintISSN, htmlAttributes: new { @class = "text-info" })
+                <label class="form-control">@(Model.PrintISSN.ToString() ?? " ")</label>
+            </div>
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.OnlineISSN, Resources.Administration.OnlineISSN, htmlAttributes: new { @class = "text-info" })
+                <label class="form-control">@(Model.OnlineISSN.ToString() ?? " ")</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.CreateUser_FullName, Resources.Resource.CreateUserFullNameEn, htmlAttributes: new { @class = "text-info" })
+                @Html.Label(Model.CreateUser_FullName ?? " ", new { @class = "form-control" })
+            </div>
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.CreateDate, Resources.Resource.CreateDateTime, htmlAttributes: new { @class = "text-info" })
+                @Html.Label(Model.CreateDate.ToString(Classes.Common.Constant.DateTimeFormat), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.ModifyUser_FullName, Resources.Resource.ModifyUserFullNameEn, htmlAttributes: new { @class = "text-info" })
+                @Html.Label(Model.ModifyUser_FullName ?? " ", new { @class = "form-control" })
+            </div>
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.ModifyDate, Resources.Resource.ModifyDateTime, htmlAttributes: new { @class = "text-info" })
+                @Html.Label(Model.ModifyDate != null ? ((DateTime)Model.ModifyDate).ToString(Classes.Common.Constant.DateTimeFormat) : "", new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" type="button" ng-click="cancel()">@Resources.Resource.ButtonOk</button>
+    </div>
+}

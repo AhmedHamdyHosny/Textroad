@@ -1,0 +1,1312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Security.DataLayer.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccessType">
+          <Key>
+            <PropertyRef Name="AccessTypeID" />
+          </Key>
+          <Property Name="AccessTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AccessTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsBlock" Type="bit" Nullable="false" />
+          <Property Name="CreateUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsBlock" Type="bit" Nullable="false" />
+          <Property Name="CreateUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RoleService">
+          <Key>
+            <PropertyRef Name="RoleServiceID" />
+          </Key>
+          <Property Name="RoleServiceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ServiceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsBlock" Type="bit" Nullable="false" />
+          <Property Name="CreateUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RoleServiceAccess">
+          <Key>
+            <PropertyRef Name="RoleServiceAccessID" />
+          </Key>
+          <Property Name="RoleServiceAccessID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ServiceAccessID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsBlock" Type="bit" Nullable="false" />
+          <Property Name="CreateUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ServiceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ServiceTag" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ServiceName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ServiceDescription" Type="varchar" MaxLength="200" />
+          <Property Name="IsBlock" Type="bit" Nullable="false" />
+          <Property Name="CreateUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ServiceAccess">
+          <Key>
+            <PropertyRef Name="ServiceAccessID" />
+          </Key>
+          <Property Name="ServiceAccessID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ServiceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AccessTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ControlTag" Type="varchar" MaxLength="50" />
+          <Property Name="IsBlock" Type="bit" Nullable="false" />
+          <Property Name="CreateUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="20" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Affilition" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CountryID" Type="uniqueidentifier" />
+          <Property Name="UserTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RegistrationDate" Type="date" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="AllowAccess" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="UserGroupId" />
+          </Key>
+          <Property Name="UserGroupId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GroupName_en" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GroupName_ar" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsBlock" Type="bit" Nullable="false" />
+          <Property Name="CreateUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserGroupRole">
+          <Key>
+            <PropertyRef Name="UserGroupRoleId" />
+          </Key>
+          <Property Name="UserGroupRoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserGroupId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsBlock" Type="bit" Nullable="false" />
+          <Property Name="CreateUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsBlock" Type="bit" Nullable="false" />
+          <Property Name="CreateUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserService">
+          <Key>
+            <PropertyRef Name="UserServiceID" />
+          </Key>
+          <Property Name="UserServiceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ServiceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsBlock" Type="bit" Nullable="false" />
+          <Property Name="CreateUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="int" Nullable="false" />
+          <Property Name="ModifyUserId" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserServiceAccess">
+          <Key>
+            <PropertyRef Name="UserServiceAccessID" />
+          </Key>
+          <Property Name="UserServiceAccessID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ServiceAccessId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsBlock" Type="bit" Nullable="false" />
+          <Property Name="CreateUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="int" Nullable="false" />
+          <Property Name="ModifyUserId" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeID" />
+          </Key>
+          <Property Name="UserTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsBlock" Type="bit" Nullable="false" />
+          <Property Name="CreateUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TextRoadDB.security.ServiceAccessView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ServiceAccessView">
+          <Key>
+            <PropertyRef Name="ServiceAccessID" />
+            <PropertyRef Name="ServiceID" />
+            <PropertyRef Name="ServiceTag" />
+            <PropertyRef Name="ServiceName" />
+            <PropertyRef Name="Service_IsBlock" />
+            <PropertyRef Name="AccessTypeID" />
+            <PropertyRef Name="AccessTypeName" />
+            <PropertyRef Name="AccessType_IsBlock" />
+            <PropertyRef Name="ServiceAccess_IsBlock" />
+          </Key>
+          <Property Name="ServiceAccessID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ServiceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ServiceTag" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ServiceName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ServiceDescription" Type="varchar" MaxLength="200" />
+          <Property Name="Service_IsBlock" Type="bit" Nullable="false" />
+          <Property Name="AccessTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AccessTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccessType_IsBlock" Type="bit" Nullable="false" />
+          <Property Name="ControlTag" Type="varchar" MaxLength="50" />
+          <Property Name="ServiceAccess_IsBlock" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TextRoadDB.security.UserRoleServiceAccessView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserRoleServiceAccessView">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ServiceId" />
+            <PropertyRef Name="ServiceTag" />
+            <PropertyRef Name="ServiceName" />
+            <PropertyRef Name="ServiceAccessId" />
+            <PropertyRef Name="AccessTypeId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" />
+          <Property Name="ServiceId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ServiceTag" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ServiceName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ServiceAccessId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AccessTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ControlTag" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TextRoadDB.security.UserRoleView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserRoleView">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="RoleName" />
+            <PropertyRef Name="IsBlock" />
+          </Key>
+          <Property Name="UserRoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsBlock" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TextRoadDB.security.UserView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <Association Name="FK_RoleService_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="RoleService" Type="Self.RoleService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="RoleService">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleService_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="RoleService" Type="Self.RoleService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="RoleService">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleServiceAccess_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="RoleServiceAccess" Type="Self.RoleServiceAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="RoleServiceAccess">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleServiceAccess_ServiceAccess">
+          <End Role="ServiceAccess" Type="Self.ServiceAccess" Multiplicity="1" />
+          <End Role="RoleServiceAccess" Type="Self.RoleServiceAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceAccess">
+              <PropertyRef Name="ServiceAccessID" />
+            </Principal>
+            <Dependent Role="RoleServiceAccess">
+              <PropertyRef Name="ServiceAccessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceAccess_AccessType">
+          <End Role="AccessType" Type="Self.AccessType" Multiplicity="1" />
+          <End Role="ServiceAccess" Type="Self.ServiceAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessType">
+              <PropertyRef Name="AccessTypeID" />
+            </Principal>
+            <Dependent Role="ServiceAccess">
+              <PropertyRef Name="AccessTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceAccess_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceAccess" Type="Self.ServiceAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="ServiceAccess">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserType">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="UserTypeID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupRole_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserGroupRole" Type="Self.UserGroupRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserGroupRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupRole_UserGroup">
+          <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="1" />
+          <End Role="UserGroupRole" Type="Self.UserGroupRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroup">
+              <PropertyRef Name="UserGroupId" />
+            </Principal>
+            <Dependent Role="UserGroupRole">
+              <PropertyRef Name="UserGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserService_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="UserService">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserService_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserService">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserServiceAccess_ServiceAccess">
+          <End Role="ServiceAccess" Type="Self.ServiceAccess" Multiplicity="1" />
+          <End Role="UserServiceAccess" Type="Self.UserServiceAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceAccess">
+              <PropertyRef Name="ServiceAccessID" />
+            </Principal>
+            <Dependent Role="UserServiceAccess">
+              <PropertyRef Name="ServiceAccessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserServiceAccess_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserServiceAccess" Type="Self.UserServiceAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserServiceAccess">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SecurityDataLayerStoreContainer">
+          <EntitySet Name="AccessType" EntityType="Self.AccessType" Schema="security" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="security" store:Type="Tables" />
+          <EntitySet Name="RoleService" EntityType="Self.RoleService" Schema="security" store:Type="Tables" />
+          <EntitySet Name="RoleServiceAccess" EntityType="Self.RoleServiceAccess" Schema="security" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="security" store:Type="Tables" />
+          <EntitySet Name="ServiceAccess" EntityType="Self.ServiceAccess" Schema="security" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="security" store:Type="Tables" />
+          <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="security" store:Type="Tables" />
+          <EntitySet Name="UserGroupRole" EntityType="Self.UserGroupRole" Schema="security" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="security" store:Type="Tables" />
+          <EntitySet Name="UserService" EntityType="Self.UserService" Schema="security" store:Type="Tables" />
+          <EntitySet Name="UserServiceAccess" EntityType="Self.UserServiceAccess" Schema="security" store:Type="Tables" />
+          <EntitySet Name="UserType" EntityType="Self.UserType" Schema="security" store:Type="Tables" />
+          <EntitySet Name="ServiceAccessView" EntityType="Self.ServiceAccessView" store:Type="Views" store:Schema="security">
+            <DefiningQuery>SELECT 
+    [ServiceAccessView].[ServiceAccessID] AS [ServiceAccessID], 
+    [ServiceAccessView].[ServiceID] AS [ServiceID], 
+    [ServiceAccessView].[ServiceTag] AS [ServiceTag], 
+    [ServiceAccessView].[ServiceName] AS [ServiceName], 
+    [ServiceAccessView].[ServiceDescription] AS [ServiceDescription], 
+    [ServiceAccessView].[Service_IsBlock] AS [Service_IsBlock], 
+    [ServiceAccessView].[AccessTypeID] AS [AccessTypeID], 
+    [ServiceAccessView].[AccessTypeName] AS [AccessTypeName], 
+    [ServiceAccessView].[AccessType_IsBlock] AS [AccessType_IsBlock], 
+    [ServiceAccessView].[ControlTag] AS [ControlTag], 
+    [ServiceAccessView].[ServiceAccess_IsBlock] AS [ServiceAccess_IsBlock]
+    FROM [security].[ServiceAccessView] AS [ServiceAccessView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UserRoleServiceAccessView" EntityType="Self.UserRoleServiceAccessView" store:Type="Views" store:Schema="security">
+            <DefiningQuery>SELECT 
+    [UserRoleServiceAccessView].[UserId] AS [UserId], 
+    [UserRoleServiceAccessView].[RoleId] AS [RoleId], 
+    [UserRoleServiceAccessView].[ServiceId] AS [ServiceId], 
+    [UserRoleServiceAccessView].[ServiceTag] AS [ServiceTag], 
+    [UserRoleServiceAccessView].[ServiceName] AS [ServiceName], 
+    [UserRoleServiceAccessView].[ServiceAccessId] AS [ServiceAccessId], 
+    [UserRoleServiceAccessView].[AccessTypeId] AS [AccessTypeId], 
+    [UserRoleServiceAccessView].[ControlTag] AS [ControlTag]
+    FROM [security].[UserRoleServiceAccessView] AS [UserRoleServiceAccessView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UserRoleView" EntityType="Self.UserRoleView" store:Type="Views" store:Schema="security">
+            <DefiningQuery>SELECT 
+    [UserRoleView].[UserRoleId] AS [UserRoleId], 
+    [UserRoleView].[UserId] AS [UserId], 
+    [UserRoleView].[RoleId] AS [RoleId], 
+    [UserRoleView].[RoleName] AS [RoleName], 
+    [UserRoleView].[IsBlock] AS [IsBlock]
+    FROM [security].[UserRoleView] AS [UserRoleView]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_RoleService_Role" Association="Self.FK_RoleService_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RoleService" EntitySet="RoleService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleService_Service" Association="Self.FK_RoleService_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="RoleService" EntitySet="RoleService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleServiceAccess_Role" Association="Self.FK_RoleServiceAccess_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RoleServiceAccess" EntitySet="RoleServiceAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleServiceAccess_ServiceAccess" Association="Self.FK_RoleServiceAccess_ServiceAccess">
+            <End Role="ServiceAccess" EntitySet="ServiceAccess" />
+            <End Role="RoleServiceAccess" EntitySet="RoleServiceAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceAccess_AccessType" Association="Self.FK_ServiceAccess_AccessType">
+            <End Role="AccessType" EntitySet="AccessType" />
+            <End Role="ServiceAccess" EntitySet="ServiceAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceAccess_Service" Association="Self.FK_ServiceAccess_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceAccess" EntitySet="ServiceAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupRole_Role" Association="Self.FK_UserGroupRole_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserGroupRole" EntitySet="UserGroupRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupRole_UserGroup" Association="Self.FK_UserGroupRole_UserGroup">
+            <End Role="UserGroup" EntitySet="UserGroup" />
+            <End Role="UserGroupRole" EntitySet="UserGroupRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserService_Service" Association="Self.FK_UserService_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="UserService" EntitySet="UserService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserService_User" Association="Self.FK_UserService_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserService" EntitySet="UserService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserServiceAccess_ServiceAccess" Association="Self.FK_UserServiceAccess_ServiceAccess">
+            <End Role="ServiceAccess" EntitySet="ServiceAccess" />
+            <End Role="UserServiceAccess" EntitySet="UserServiceAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserServiceAccess_User" Association="Self.FK_UserServiceAccess_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserServiceAccess" EntitySet="UserServiceAccess" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Security.DataLayer" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccessType">
+          <Key>
+            <PropertyRef Name="AccessTypeID" />
+          </Key>
+          <Property Name="AccessTypeID" Type="Guid" Nullable="false" />
+          <Property Name="AccessTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsBlock" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ServiceAccess" Relationship="Self.FK_ServiceAccess_AccessType" FromRole="AccessType" ToRole="ServiceAccess" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Guid" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsBlock" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RoleService" Relationship="Self.FK_RoleService_Role" FromRole="Role" ToRole="RoleService" />
+          <NavigationProperty Name="RoleServiceAccess" Relationship="Self.FK_RoleServiceAccess_Role" FromRole="Role" ToRole="RoleServiceAccess" />
+          <NavigationProperty Name="UserGroupRole" Relationship="Self.FK_UserGroupRole_Role" FromRole="Role" ToRole="UserGroupRole" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK_UserRole_Role" FromRole="Role" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="RoleService">
+          <Key>
+            <PropertyRef Name="RoleServiceID" />
+          </Key>
+          <Property Name="RoleServiceID" Type="Guid" Nullable="false" />
+          <Property Name="RoleID" Type="Guid" Nullable="false" />
+          <Property Name="ServiceID" Type="Guid" Nullable="false" />
+          <Property Name="IsBlock" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_RoleService_Role" FromRole="RoleService" ToRole="Role" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_RoleService_Service" FromRole="RoleService" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="RoleServiceAccess">
+          <Key>
+            <PropertyRef Name="RoleServiceAccessID" />
+          </Key>
+          <Property Name="RoleServiceAccessID" Type="Guid" Nullable="false" />
+          <Property Name="RoleID" Type="Guid" Nullable="false" />
+          <Property Name="ServiceAccessID" Type="Guid" Nullable="false" />
+          <Property Name="IsBlock" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_RoleServiceAccess_Role" FromRole="RoleServiceAccess" ToRole="Role" />
+          <NavigationProperty Name="ServiceAccess" Relationship="Self.FK_RoleServiceAccess_ServiceAccess" FromRole="RoleServiceAccess" ToRole="ServiceAccess" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ServiceID" Type="Guid" Nullable="false" />
+          <Property Name="ServiceTag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ServiceName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ServiceDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsBlock" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RoleService" Relationship="Self.FK_RoleService_Service" FromRole="Service" ToRole="RoleService" />
+          <NavigationProperty Name="ServiceAccess" Relationship="Self.FK_ServiceAccess_Service" FromRole="Service" ToRole="ServiceAccess" />
+          <NavigationProperty Name="UserService" Relationship="Self.FK_UserService_Service" FromRole="Service" ToRole="UserService" />
+        </EntityType>
+        <EntityType Name="ServiceAccess">
+          <Key>
+            <PropertyRef Name="ServiceAccessID" />
+          </Key>
+          <Property Name="ServiceAccessID" Type="Guid" Nullable="false" />
+          <Property Name="ServiceID" Type="Guid" Nullable="false" />
+          <Property Name="AccessTypeID" Type="Guid" Nullable="false" />
+          <Property Name="ControlTag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsBlock" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AccessType" Relationship="Self.FK_ServiceAccess_AccessType" FromRole="ServiceAccess" ToRole="AccessType" />
+          <NavigationProperty Name="RoleServiceAccess" Relationship="Self.FK_RoleServiceAccess_ServiceAccess" FromRole="ServiceAccess" ToRole="RoleServiceAccess" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_ServiceAccess_Service" FromRole="ServiceAccess" ToRole="Service" />
+          <NavigationProperty Name="UserServiceAccess" Relationship="Self.FK_UserServiceAccess_ServiceAccess" FromRole="ServiceAccess" ToRole="UserServiceAccess" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Affilition" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CountryID" Type="Guid" />
+          <Property Name="UserTypeID" Type="Guid" Nullable="false" />
+          <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="AllowAccess" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserType" Relationship="Self.FK_User_UserType" FromRole="User" ToRole="UserType" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
+          <NavigationProperty Name="UserService" Relationship="Self.FK_UserService_User" FromRole="User" ToRole="UserService" />
+          <NavigationProperty Name="UserServiceAccess" Relationship="Self.FK_UserServiceAccess_User" FromRole="User" ToRole="UserServiceAccess" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="UserGroupId" />
+          </Key>
+          <Property Name="UserGroupId" Type="Guid" Nullable="false" />
+          <Property Name="GroupName_en" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GroupName_ar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsBlock" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserGroupRole" Relationship="Self.FK_UserGroupRole_UserGroup" FromRole="UserGroup" ToRole="UserGroupRole" />
+        </EntityType>
+        <EntityType Name="UserGroupRole">
+          <Key>
+            <PropertyRef Name="UserGroupRoleId" />
+          </Key>
+          <Property Name="UserGroupRoleId" Type="Guid" Nullable="false" />
+          <Property Name="UserGroupId" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <Property Name="IsBlock" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_UserGroupRole_Role" FromRole="UserGroupRole" ToRole="Role" />
+          <NavigationProperty Name="UserGroup" Relationship="Self.FK_UserGroupRole_UserGroup" FromRole="UserGroupRole" ToRole="UserGroup" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <Property Name="IsBlock" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_UserRole_Role" FromRole="UserRole" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserRole_User" FromRole="UserRole" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserService">
+          <Key>
+            <PropertyRef Name="UserServiceID" />
+          </Key>
+          <Property Name="UserServiceID" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="ServiceID" Type="Guid" Nullable="false" />
+          <Property Name="IsBlock" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="Int32" Nullable="false" />
+          <Property Name="ModifyUserId" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_UserService_Service" FromRole="UserService" ToRole="Service" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserService_User" FromRole="UserService" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserServiceAccess">
+          <Key>
+            <PropertyRef Name="UserServiceAccessID" />
+          </Key>
+          <Property Name="UserServiceAccessID" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="ServiceAccessId" Type="Guid" Nullable="false" />
+          <Property Name="IsBlock" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="Int32" Nullable="false" />
+          <Property Name="ModifyUserId" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ServiceAccess" Relationship="Self.FK_UserServiceAccess_ServiceAccess" FromRole="UserServiceAccess" ToRole="ServiceAccess" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserServiceAccess_User" FromRole="UserServiceAccess" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserTypeID" />
+          </Key>
+          <Property Name="UserTypeID" Type="Guid" Nullable="false" />
+          <Property Name="UserTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsBlock" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUserId" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_UserType" FromRole="UserType" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ServiceAccessView">
+          <Key>
+            <PropertyRef Name="ServiceAccessID" />
+            <PropertyRef Name="ServiceID" />
+            <PropertyRef Name="ServiceTag" />
+            <PropertyRef Name="ServiceName" />
+            <PropertyRef Name="Service_IsBlock" />
+            <PropertyRef Name="AccessTypeID" />
+            <PropertyRef Name="AccessTypeName" />
+            <PropertyRef Name="AccessType_IsBlock" />
+            <PropertyRef Name="ServiceAccess_IsBlock" />
+          </Key>
+          <Property Name="ServiceAccessID" Type="Guid" Nullable="false" />
+          <Property Name="ServiceID" Type="Guid" Nullable="false" />
+          <Property Name="ServiceTag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ServiceName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ServiceDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Service_IsBlock" Type="Boolean" Nullable="false" />
+          <Property Name="AccessTypeID" Type="Guid" Nullable="false" />
+          <Property Name="AccessTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccessType_IsBlock" Type="Boolean" Nullable="false" />
+          <Property Name="ControlTag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceAccess_IsBlock" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRoleServiceAccessView">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ServiceId" />
+            <PropertyRef Name="ServiceTag" />
+            <PropertyRef Name="ServiceName" />
+            <PropertyRef Name="ServiceAccessId" />
+            <PropertyRef Name="AccessTypeId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" />
+          <Property Name="ServiceId" Type="Guid" Nullable="false" />
+          <Property Name="ServiceTag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ServiceName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ServiceAccessId" Type="Guid" Nullable="false" />
+          <Property Name="AccessTypeId" Type="Guid" Nullable="false" />
+          <Property Name="ControlTag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserRoleView">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="RoleName" />
+            <PropertyRef Name="IsBlock" />
+          </Key>
+          <Property Name="UserRoleId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsBlock" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ServiceAccess_AccessType">
+          <End Role="AccessType" Type="Self.AccessType" Multiplicity="1" />
+          <End Role="ServiceAccess" Type="Self.ServiceAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessType">
+              <PropertyRef Name="AccessTypeID" />
+            </Principal>
+            <Dependent Role="ServiceAccess">
+              <PropertyRef Name="AccessTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleService_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="RoleService" Type="Self.RoleService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="RoleService">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleServiceAccess_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="RoleServiceAccess" Type="Self.RoleServiceAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="RoleServiceAccess">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupRole_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserGroupRole" Type="Self.UserGroupRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserGroupRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleService_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="RoleService" Type="Self.RoleService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="RoleService">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleServiceAccess_ServiceAccess">
+          <End Role="ServiceAccess" Type="Self.ServiceAccess" Multiplicity="1" />
+          <End Role="RoleServiceAccess" Type="Self.RoleServiceAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceAccess">
+              <PropertyRef Name="ServiceAccessID" />
+            </Principal>
+            <Dependent Role="RoleServiceAccess">
+              <PropertyRef Name="ServiceAccessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceAccess_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceAccess" Type="Self.ServiceAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="ServiceAccess">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserService_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="UserService">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserServiceAccess_ServiceAccess">
+          <End Role="ServiceAccess" Type="Self.ServiceAccess" Multiplicity="1" />
+          <End Role="UserServiceAccess" Type="Self.UserServiceAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceAccess">
+              <PropertyRef Name="ServiceAccessID" />
+            </Principal>
+            <Dependent Role="UserServiceAccess">
+              <PropertyRef Name="ServiceAccessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserType">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="UserTypeID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserService_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserService" Type="Self.UserService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserService">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserServiceAccess_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserServiceAccess" Type="Self.UserServiceAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserServiceAccess">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupRole_UserGroup">
+          <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="1" />
+          <End Role="UserGroupRole" Type="Self.UserGroupRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroup">
+              <PropertyRef Name="UserGroupId" />
+            </Principal>
+            <Dependent Role="UserGroupRole">
+              <PropertyRef Name="UserGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SecurityEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccessType" EntityType="Self.AccessType" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="RoleService" EntityType="Self.RoleService" />
+          <EntitySet Name="RoleServiceAccess" EntityType="Self.RoleServiceAccess" />
+          <EntitySet Name="Service" EntityType="Self.Service" />
+          <EntitySet Name="ServiceAccess" EntityType="Self.ServiceAccess" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="UserGroup" EntityType="Self.UserGroup" />
+          <EntitySet Name="UserGroupRole" EntityType="Self.UserGroupRole" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" />
+          <EntitySet Name="UserService" EntityType="Self.UserService" />
+          <EntitySet Name="UserServiceAccess" EntityType="Self.UserServiceAccess" />
+          <EntitySet Name="UserType" EntityType="Self.UserType" />
+          <EntitySet Name="ServiceAccessView" EntityType="Self.ServiceAccessView" />
+          <EntitySet Name="UserRoleServiceAccessView" EntityType="Self.UserRoleServiceAccessView" />
+          <EntitySet Name="UserRoleView" EntityType="Self.UserRoleView" />
+          <AssociationSet Name="FK_ServiceAccess_AccessType" Association="Self.FK_ServiceAccess_AccessType">
+            <End Role="AccessType" EntitySet="AccessType" />
+            <End Role="ServiceAccess" EntitySet="ServiceAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleService_Role" Association="Self.FK_RoleService_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RoleService" EntitySet="RoleService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleServiceAccess_Role" Association="Self.FK_RoleServiceAccess_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RoleServiceAccess" EntitySet="RoleServiceAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupRole_Role" Association="Self.FK_UserGroupRole_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserGroupRole" EntitySet="UserGroupRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleService_Service" Association="Self.FK_RoleService_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="RoleService" EntitySet="RoleService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleServiceAccess_ServiceAccess" Association="Self.FK_RoleServiceAccess_ServiceAccess">
+            <End Role="ServiceAccess" EntitySet="ServiceAccess" />
+            <End Role="RoleServiceAccess" EntitySet="RoleServiceAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceAccess_Service" Association="Self.FK_ServiceAccess_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceAccess" EntitySet="ServiceAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserService_Service" Association="Self.FK_UserService_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="UserService" EntitySet="UserService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserServiceAccess_ServiceAccess" Association="Self.FK_UserServiceAccess_ServiceAccess">
+            <End Role="ServiceAccess" EntitySet="ServiceAccess" />
+            <End Role="UserServiceAccess" EntitySet="UserServiceAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserService_User" Association="Self.FK_UserService_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserService" EntitySet="UserService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserServiceAccess_User" Association="Self.FK_UserServiceAccess_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserServiceAccess" EntitySet="UserServiceAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupRole_UserGroup" Association="Self.FK_UserGroupRole_UserGroup">
+            <End Role="UserGroup" EntitySet="UserGroup" />
+            <End Role="UserGroupRole" EntitySet="UserGroupRole" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SecurityDataLayerStoreContainer" CdmEntityContainer="SecurityEntities">
+          <EntitySetMapping Name="AccessType">
+            <EntityTypeMapping TypeName="Security.DataLayer.AccessType">
+              <MappingFragment StoreEntitySet="AccessType">
+                <ScalarProperty Name="AccessTypeID" ColumnName="AccessTypeID" />
+                <ScalarProperty Name="AccessTypeName" ColumnName="AccessTypeName" />
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="Security.DataLayer.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleService">
+            <EntityTypeMapping TypeName="Security.DataLayer.RoleService">
+              <MappingFragment StoreEntitySet="RoleService">
+                <ScalarProperty Name="RoleServiceID" ColumnName="RoleServiceID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleServiceAccess">
+            <EntityTypeMapping TypeName="Security.DataLayer.RoleServiceAccess">
+              <MappingFragment StoreEntitySet="RoleServiceAccess">
+                <ScalarProperty Name="RoleServiceAccessID" ColumnName="RoleServiceAccessID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="ServiceAccessID" ColumnName="ServiceAccessID" />
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="Security.DataLayer.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="ServiceTag" ColumnName="ServiceTag" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="ServiceDescription" ColumnName="ServiceDescription" />
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceAccess">
+            <EntityTypeMapping TypeName="Security.DataLayer.ServiceAccess">
+              <MappingFragment StoreEntitySet="ServiceAccess">
+                <ScalarProperty Name="ServiceAccessID" ColumnName="ServiceAccessID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="AccessTypeID" ColumnName="AccessTypeID" />
+                <ScalarProperty Name="ControlTag" ColumnName="ControlTag" />
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Security.DataLayer.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Affilition" ColumnName="Affilition" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="AllowAccess" ColumnName="AllowAccess" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroup">
+            <EntityTypeMapping TypeName="Security.DataLayer.UserGroup">
+              <MappingFragment StoreEntitySet="UserGroup">
+                <ScalarProperty Name="UserGroupId" ColumnName="UserGroupId" />
+                <ScalarProperty Name="GroupName_en" ColumnName="GroupName_en" />
+                <ScalarProperty Name="GroupName_ar" ColumnName="GroupName_ar" />
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroupRole">
+            <EntityTypeMapping TypeName="Security.DataLayer.UserGroupRole">
+              <MappingFragment StoreEntitySet="UserGroupRole">
+                <ScalarProperty Name="UserGroupRoleId" ColumnName="UserGroupRoleId" />
+                <ScalarProperty Name="UserGroupId" ColumnName="UserGroupId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRole">
+            <EntityTypeMapping TypeName="Security.DataLayer.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserService">
+            <EntityTypeMapping TypeName="Security.DataLayer.UserService">
+              <MappingFragment StoreEntitySet="UserService">
+                <ScalarProperty Name="UserServiceID" ColumnName="UserServiceID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserServiceAccess">
+            <EntityTypeMapping TypeName="Security.DataLayer.UserServiceAccess">
+              <MappingFragment StoreEntitySet="UserServiceAccess">
+                <ScalarProperty Name="UserServiceAccessID" ColumnName="UserServiceAccessID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ServiceAccessId" ColumnName="ServiceAccessId" />
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserType">
+            <EntityTypeMapping TypeName="Security.DataLayer.UserType">
+              <MappingFragment StoreEntitySet="UserType">
+                <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+                <ScalarProperty Name="UserTypeName" ColumnName="UserTypeName" />
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
+                <ScalarProperty Name="CreateUserId" ColumnName="CreateUserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceAccessView">
+            <EntityTypeMapping TypeName="Security.DataLayer.ServiceAccessView">
+              <MappingFragment StoreEntitySet="ServiceAccessView">
+                <ScalarProperty Name="ServiceAccessID" ColumnName="ServiceAccessID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="ServiceTag" ColumnName="ServiceTag" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="ServiceDescription" ColumnName="ServiceDescription" />
+                <ScalarProperty Name="Service_IsBlock" ColumnName="Service_IsBlock" />
+                <ScalarProperty Name="AccessTypeID" ColumnName="AccessTypeID" />
+                <ScalarProperty Name="AccessTypeName" ColumnName="AccessTypeName" />
+                <ScalarProperty Name="AccessType_IsBlock" ColumnName="AccessType_IsBlock" />
+                <ScalarProperty Name="ControlTag" ColumnName="ControlTag" />
+                <ScalarProperty Name="ServiceAccess_IsBlock" ColumnName="ServiceAccess_IsBlock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoleServiceAccessView">
+            <EntityTypeMapping TypeName="Security.DataLayer.UserRoleServiceAccessView">
+              <MappingFragment StoreEntitySet="UserRoleServiceAccessView">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="ServiceTag" ColumnName="ServiceTag" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="ServiceAccessId" ColumnName="ServiceAccessId" />
+                <ScalarProperty Name="AccessTypeId" ColumnName="AccessTypeId" />
+                <ScalarProperty Name="ControlTag" ColumnName="ControlTag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoleView">
+            <EntityTypeMapping TypeName="Security.DataLayer.UserRoleView">
+              <MappingFragment StoreEntitySet="UserRoleView">
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="IsBlock" ColumnName="IsBlock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

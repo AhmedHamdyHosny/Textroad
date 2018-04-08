@@ -1,0 +1,54 @@
+﻿@model Textroad.Models.PublishPeriodEditModel
+@using Classes.Helper;
+@using BeyondThemes.Bootstrap;
+
+@{
+    ViewBag.Title = Resources.Administration.PublishPeriodEdit;
+    Layout = "~/Views/Shared/_Popup.cshtml";
+}
+
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+    <h2 class="modal-title">@Resources.Administration.PublishPeriodEdit</h2>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    <div class="modal-body">
+        @Html.AntiForgeryToken()
+        <div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => Model.EditItem.PublishPeriodID)
+            <div class="form-group">
+                @Html.LabelFor(model => Model.EditItem.PublishPeriodName, Resources.Administration.PublishPeriodDescription, htmlAttributes: new { @class = "text-info" })
+                @Html.EditorFor(model => Model.EditItem.PublishPeriodName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => Model.EditItem.PublishPeriodName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Bootstrap().CheckBoxFor(model => model.EditItem.IsBlock).Text(Resources.Resource.Block).HtmlAttributes(new { @class = "colored-danger" })
+            </div>
+            <div>
+                @Html.HiddenFor(model => model.EditItem.CreateUserId)
+                @Html.HiddenFor(model => model.EditItem.CreateDate)
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" value="@Resources.Resource.ButtonSave" class="btn btn-success" />
+        <button class="btn btn-default" type="button" ng-click="cancel()">@Resources.Resource.ButtonCancel</button>
+    </div>
+}
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#form').submit(function (event) {
+                if (!$(this).valid()) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+}
+

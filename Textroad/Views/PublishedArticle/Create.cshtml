@@ -1,0 +1,249 @@
+﻿@model Textroad.Models.PublishedArticleCreateBindModel
+@using Classes.Helper;
+@using Classes.Common;
+@using BeyondThemes.Bootstrap;
+@using Newtonsoft.Json;
+@{
+    ViewBag.Title = Resources.Administration.CreatePublishedArticle;
+    Layout = "~/Views/Shared/_Popup.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/css/1.custom-style/AngularDDL.css" />
+<link href="~/Content/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+
+<style>
+    .input-group-addon {
+        width: 12%;
+    }
+    .row-dropdownlist {
+        height: 22px;
+        padding: 0px 5px;
+    }
+    .gridcustom-select {
+        position: absolute;
+        height: 22px;
+    }
+    .gridcustom-select.open > a.dropdown-toggle {
+        line-height: 22px;
+    }
+    .gridcustom-select > a.dropdown-toggle {
+        height: 22px;
+        line-height: 22px;
+    }
+    .gridCheckBox {
+        position: fixed !important;
+    }
+</style>
+
+
+<div class="modal-header">
+    <div class="widget-buttons pull-right">
+        <a href="javascript:void(0);" onclick="popupExpand(this)" data-toggle="maximize">
+            <i class="fa fa-expand"></i>
+        </a>
+        <a href="javascript:void(0);" ng-click="cancel()" data-toggle="dispose">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+    <h2 class="modal-title">@Resources.Administration.NewPublishedArticle</h2>
+</div>
+
+@{
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form", ng_submit = "formSubmit($event)" }))
+{
+    <div class="modal-body withVScroll">
+        @Html.AntiForgeryToken()
+        <div ng-init="bindData()">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @{ Html.RenderAction("Partial_SubjectJournalJournalVersion", "Common", new { journal = new PartialParamters.Journal() { Show = true } } ); }
+                </div>
+                <div class="col-xs-6 form-group">
+                    @{ Html.RenderAction("Partial_SubjectJournalJournalVersion", "Common", new { journalVersion = new PartialParamters.JournalVersion() { Show = true, UseSelect = true, Required = true } }); }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.ArticleTypeID, Resources.Administration.ArticleType, htmlAttributes: new { @class = "text-info" })
+                    <div custom-select="item.Value as item.Text for item in Articletypes | filter: $searchTerm" ng-model="model.ArticleTypeID" autofocus></div>
+                    @Html.ValidationMessageFor(model => model.ArticleTypeID, "", new { @class = "text-danger", @id = "ArticleTypeID_Validation" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.ArticleTitle, Resources.Administration.ArticleTitle, htmlAttributes: new { @class = "text-info" })
+                    @Html.EditorFor(model => model.ArticleTitle, new { htmlAttributes = new { @class = "form-control", @required = "true", @data_ng_model = "model.ArticleTitle" } })
+                    @Html.ValidationMessageFor(model => model.ArticleTitle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.Abstract, Resources.Administration.Abstract, htmlAttributes: new { @class = "text-info"})
+                    @Html.TextAreaFor(model => model.Abstract, htmlAttributes: new { @class = "form-control" , @required = "true", @data_ng_model = "model.Abstract" })
+                    @Html.ValidationMessageFor(model => model.Abstract, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.ArticleContent, Resources.Administration.ArticleContent, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.ArticleContent, htmlAttributes: new { @class = "form-control", @required = "true", @data_ng_model = "model.ArticleContent" })
+                    @Html.ValidationMessageFor(model => model.ArticleContent, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.RecievedDate, Resources.Administration.RecievedDate, htmlAttributes: new { @class = "text-info" })
+                    <div id="recievedDateDiv" class="input-group date" data-date-format="dd/mm/yyyy" data-link-field="RecievedDate">
+                        <input class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-th" ng-click="showRecievedDatePicker()"></span></span>
+                    </div>
+                    <input type="hidden" name="RecievedDate" id="RecievedDate" value="" ng-model="model.RecievedDate" />
+                    @Html.ValidationMessageFor(model => model.RecievedDate, "", new { @class = "text-danger", @id = "RecievedDate_Validation" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.AcceptDate, Resources.Administration.AcceptDate, htmlAttributes: new { @class = "text-info" })
+                    <div id="acceptDateDiv" class="input-group date" data-date-format="dd/mm/yyyy" data-link-field="AcceptDate">
+                        <input class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-th" ng-click="showAcceptDatePicker()"></span></span>
+                    </div>
+                    <input type="hidden" name="AcceptDate" id="AcceptDate" value="" ng-model="model.AcceptDate" />
+                    @Html.ValidationMessageFor(model => model.RecievedDate, "", new { @class = "text-danger", @id = "AcceptDate_Validation" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.FromPage, Resources.Administration.FromPage, htmlAttributes: new { @class = "text-info" })
+                    @Html.EditorFor(model => model.FromPage, new { htmlAttributes= new { @class = "form-control", @required = "true", @data_ng_model = "model.FromPage" } })
+                    @Html.ValidationMessageFor(model => model.FromPage, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.ToPage, Resources.Administration.ToPage, htmlAttributes: new { @class = "text-info" })
+                    @Html.EditorFor(model => model.ToPage, new { htmlAttributes = new { @class = "form-control", @required = "true", @data_ng_model = "model.ToPage" } })
+                    @Html.ValidationMessageFor(model => model.ToPage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.PublishDate, Resources.Administration.PublishDate, htmlAttributes: new { @class = "text-info" })
+                    <div id="publishDateDiv" class="input-group date" data-date-format="dd/mm/yyyy" data-link-field="PublishDate">
+                        <input class="form-control" size="16" type="text" value="" readonly>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-th" ng-click="showPublishDatePicker()"></span></span>
+                    </div>
+                    <input type="hidden" name="PublishDate" id="PublishDate" value="" ng-model="model.PublishDate" />
+                    @Html.ValidationMessageFor(model => model.PublishDate, "", new { @class = "text-danger", @id = "PublishDate_Validation" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.Note, Resources.Resource.Note, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.Note, htmlAttributes: new { @class = "form-control", @data_ng_model = "model.Note" })
+                    @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row" ng-init="bindGirdData()">
+                <div class="col-xs-12 form-group">
+                    @using (var tabs = Html.Bootstrap().Begin(new Tabs("EmployeeTabs").Justified()))
+                    {
+                        tabs.Tab(Resources.Administration.Scope, BootstrapColors.Danger);
+                        tabs.Tab(Resources.Administration.Authors, BootstrapColors.Success);
+                        using (tabs.BeginPanel())
+                        {
+                            <div class="table-toolbar">
+                                <div class="ToolsDiv">
+                                    <a ng-click="createPublishArticleScope()" class="btn purple" id="addBtn">
+                                        <i class="fa fa-plus"></i> @Resources.Resource.ButtonAdd
+                                    </a>
+                                    <a ng-click="DeletePublishArticleScope($event);" class="btn btn-danger">
+                                        <i class="fa fa-times"></i> @Resources.Resource.ButtonDelete
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @{ Html.RenderAction("Partial_Grid", "Common", new { GridId = "PubArticleScopeGrid", UiGrid = "PubArticleScopeGridOptions", EnablePagination = false }); }
+                            </div>
+                        }
+                        using (tabs.BeginPanel())
+                        {
+                            <div class="table-toolbar">
+                                <div class="ToolsDiv">
+                                    <a ng-click="createPubArticleAuthor()" class="btn purple" id="addBtn">
+                                        <i class="fa fa-plus"></i> @Resources.Resource.ButtonAdd
+                                    </a>
+                                    <a ng-click="DeletePubArticleAuthor($event);" class="btn btn-danger">
+                                        <i class="fa fa-times"></i> @Resources.Resource.ButtonDelete
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @{ Html.RenderAction("Partial_Grid", "Common", new { GridId = "PubArticleAuthorGrid", UiGrid = "PubArticleAuthorGridOptions", EnablePagination = false }); }
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" value="@Resources.Resource.ButtonSave" class="btn btn-success" />
+        <button class="btn btn-default" type="button" ng-click="cancel()" >@Resources.Resource.ButtonCancel</button>
+    </div>
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/Content/js/datetime/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+    <script>
+        var articleTypes = @Html.Raw(JsonConvert.SerializeObject((IEnumerable<CustomSelectListItem>)ViewBag.ArticleTypes));
+        var scopes = @Html.Raw(JsonConvert.SerializeObject((IEnumerable<CustomSelectListItem>)ViewBag.Scopes));
+        var authors = @Html.Raw(JsonConvert.SerializeObject((IEnumerable<CustomSelectListItem>)ViewBag.Authors));
+        var pubArticleScope_GridColumnDefs = [
+            {
+                name: 'ScopeID',
+                displayName: '@Resources.Administration.Scope',
+                cellTemplate: '<div class="ui-grid-cell-contents ng-binding ng-scope" >' +
+                    '<div class="form-group"> ' +
+                    '<div>' +
+                    '<div custom-select="scope.Value as scope.Text for scope in grid.appScope.Scopes | filter: $searchTerm" ng-model="row.entity.ScopeID" class="gridcustom-select"  autofocus style="width:290px"></div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>',
+                enableSorting: false, enableFiltering: false, enableHiding: false, width: 300
+            }
+        ];
+
+        var pubArticleAuthor_GridColumnDefs = [
+            {
+                name: 'AuthorID',
+                displayName: '@Resources.Administration.Authors',
+                cellTemplate: '<div class="ui-grid-cell-contents ng-binding ng-scope" >' +
+                    '<div class="form-group"> ' +
+                    '<div>' +
+                    '<div custom-select="author.Value as author.Text for author in grid.appScope.Authors | filter: $searchTerm" ng-model="row.entity.AuthorID" class="gridcustom-select"  autofocus style="width:290px"></div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>',
+                enableSorting: false, enableFiltering: false, enableHiding: false, width: 300
+            },
+            {
+                name:'Corresponding',
+                displayName: '@Resources.Administration.Corresponding',
+                cellTemplate:
+                    '<div class="radio custRadioDiv">'+
+                    '<label>'+
+                    '<input name="Corresponding" ng-model="row.entity.Corresponding" type="radio" class="colored-blue" data-ng-value="true" >'+
+                    '<span class="text"> '+
+                    '</span></label></div>',
+                enableSorting: false, enableFiltering: false, enableHiding: false, width: 150
+            },
+            {
+                name: 'AuthorOrder',
+                displayName: '@Resources.Administration.Order',
+                cellTemplate: '<div class="ui-grid-cell-contents ng-binding ng-scope" >' +
+                    '<div class="form-group"> ' +
+                    '<input class="form-control girdRowControl" type="number" min="1" ng-model="row.entity.AuthorOrder" />' +
+                    '</div>' +
+                    '</div>',
+                enableSorting: false, enableFiltering: false, enableHiding: false, width: 100
+            }
+        ];
+    </script>
+}

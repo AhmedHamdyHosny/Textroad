@@ -1,0 +1,65 @@
+﻿@model Textroad.Models.SponsorEditModel
+@using Classes.Helper;
+@using BeyondThemes.Bootstrap;
+
+@{
+    ViewBag.Title = Resources.Administration.SponsorEdit;
+    Layout = "~/Views/Shared/_Popup.cshtml";
+}
+
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
+    <h2 class="modal-title">@Resources.Administration.SponsorEdit</h2>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    <div class="modal-body">
+        @Html.AntiForgeryToken()
+        <div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => Model.EditItem.SponsorID)
+            <div class="form-group">
+                @Html.LabelFor(model => Model.EditItem.SponsorName, Resources.Administration.SponsorName, htmlAttributes: new { @class = "text-info" })
+                @Html.EditorFor(model => Model.EditItem.SponsorName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => Model.EditItem.SponsorName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => Model.EditItem.Shortcut, Resources.Administration.SponsorShortcut, htmlAttributes: new { @class = "text-info" })
+                @Html.EditorFor(model => Model.EditItem.Shortcut, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => Model.EditItem.Shortcut, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => Model.EditItem.Image, Resources.Administration.SponsorImage, htmlAttributes: new { @class = "text-info" })
+                @Html.EditorFor(model => Model.EditItem.Image, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => Model.EditItem.Image, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Bootstrap().CheckBoxFor(model => model.EditItem.IsBlock).Text(Resources.Resource.Block).HtmlAttributes(new { @class = "colored-danger" })
+            </div>
+            <div>
+                @Html.HiddenFor(model => model.EditItem.CreateUserId)
+                @Html.HiddenFor(model => model.EditItem.CreateDate)
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" value="@Resources.Resource.ButtonSave" class="btn btn-success" />
+        <button class="btn btn-default" type="button" ng-click="cancel()">@Resources.Resource.ButtonCancel</button>
+    </div>
+}
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#form').submit(function (event) {
+                if (!$(this).valid()) {
+                    event.preventDefault();
+                }
+
+            });
+        });
+    </script>
+}
+

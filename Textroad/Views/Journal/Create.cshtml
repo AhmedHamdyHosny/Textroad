@@ -1,0 +1,150 @@
+﻿@model Textroad.Models.PublishedArticleCreateBindModel
+@using Classes.Helper;
+
+@{
+    ViewBag.Title = Resources.Administration.CreatePublishedArticle;
+    Layout = "~/Views/Shared/_Popup.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/css/1.custom-style/AngularDDL.css" />
+
+<div class="modal-header">
+    <div class="widget-buttons pull-right">
+        <a href="javascript:void(0);" onclick="popupExpand(this)" data-toggle="maximize">
+            <i class="fa fa-expand"></i>
+        </a>
+        <a href="javascript:void(0);" ng-click="cancel()" data-toggle="dispose">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+    <h2 class="modal-title">@Resources.Administration.NewPublishedArticle</h2>
+</div>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form", ng_submit = "formSubmit($event)" }))
+{
+    <div class="modal-body withVScroll">
+        @Html.AntiForgeryToken()
+        <div >
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.JournalName, Resources.Administration.JournalName, htmlAttributes: new { @class = "text-info" })
+                    @Html.EditorFor(model => model.JournalName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.JournalName, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.SubjectID, Resources.Administration.Subject, htmlAttributes: new { @class = "text-info" })
+                    @Html.CustomDropdownListFor(model => model.SubjectID, (IEnumerable<CustomSelectListItem>)ViewBag.SubjectID, null, Resources.Resource.SelectItem, htmlAttributes: new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.SubjectID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.PublishPeriodID, Resources.Administration.PublishPeriod, htmlAttributes: new { @class = "text-info" })
+                    @Html.CustomDropdownListFor(model => model.PublishPeriodID, (IEnumerable<CustomSelectListItem>)ViewBag.PublishPeriodID, null, Resources.Resource.SelectItem, htmlAttributes: new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.PublishPeriodID, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.ImpactFactor, Resources.Administration.ImpactFactor, htmlAttributes: new { @class = "text-info" })
+                    @Html.EditorFor(model => model.ImpactFactor, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ImpactFactor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.PrintISSN, Resources.Administration.PrintISSN, htmlAttributes: new { @class = "text-info" })
+                   @Html.EditorFor(model => model.PrintISSN, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PrintISSN, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.OnlineISSN, Resources.Administration.OnlineISSN, htmlAttributes: new { @class = "text-info" })
+                    @Html.EditorFor(model => model.OnlineISSN, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OnlineISSN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.YearIssue, Resources.Administration.PrintISSN, htmlAttributes: new { @class = "text-info" })
+                    @Html.EditorFor(model => model.YearIssue, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.YearIssue, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.ShortcutCharacter, Resources.Administration.ShortcutCharacter, htmlAttributes: new { @class = "text-info" })
+                    @Html.EditorFor(model => model.ShortcutCharacter, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ShortcutCharacter, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.About, Resources.Administration.About, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.About, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.About, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.AimsScope, Resources.Administration.AimsScope, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.AimsScope, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AimsScope, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.ArticleProcessingCharge, Resources.Administration.ArticleProcessingCharge, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.ArticleProcessingCharge, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ArticleProcessingCharge, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.PublicationEthics, Resources.Administration.PublicationEthics, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.PublicationEthics, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PublicationEthics, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditorialBoard, Resources.Administration.EditorialBoard, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.EditorialBoard, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EditorialBoard, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.AuthorGuidlines, Resources.Administration.AuthorGuidlines, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.AuthorGuidlines, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AuthorGuidlines, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.OpenSpecialIssues, Resources.Administration.OpenSpecialIssues, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.OpenSpecialIssues, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.OpenSpecialIssues, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.SpecialIssuesGuidlines, Resources.Administration.SpecialIssuesGuidlines, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.SpecialIssuesGuidlines, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SpecialIssuesGuidlines, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.ReviewersAcknowledgment, Resources.Administration.ReviewersAcknowledgment, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.ReviewersAcknowledgment, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ReviewersAcknowledgment, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.ConderencePublication, Resources.Administration.ConderencePublication, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.ConderencePublication, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ConderencePublication, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" value="@Resources.Resource.ButtonSave" class="btn btn-success" />
+        <button class="btn btn-default" type="button" ng-click="cancel()" >@Resources.Resource.ButtonCancel</button>
+    </div>
+
+}
+
+
+@section scripts {
+    <script>
+    </script>
+}

@@ -1,0 +1,158 @@
+﻿@model Textroad.Models.JournalEditModel
+@using Classes.Helper;
+@using BeyondThemes.Bootstrap;
+
+@{
+    ViewBag.Title = Resources.Administration.EditJournal;
+    Layout = "~/Views/Shared/_Popup.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/css/1.custom-style/AngularDDL.css" />
+
+<div class="modal-header">
+    <div class="widget-buttons pull-right">
+        <a href="javascript:void(0);" onclick="popupExpand(this)" data-toggle="maximize">
+            <i class="fa fa-expand"></i>
+        </a>
+        <a href="javascript:void(0);" ng-click="cancel()" data-toggle="dispose">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+    <h2 class="modal-title">@Resources.Administration.EditJournal</h2>
+</div>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form", ng_submit = "formSubmit($event)" }))
+{
+    <div class="modal-body withVScroll">
+        @Html.AntiForgeryToken()
+        <div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => Model.EditItem.JournalID)
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.JournalName, Resources.Administration.JournalName, htmlAttributes: new { @class = "text-info" })
+                    @Html.EditorFor(model => model.EditItem.JournalName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EditItem.JournalName, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.SubjectID, Resources.Administration.Subject, htmlAttributes: new { @class = "text-info" })
+                    @Html.CustomDropdownListFor(model => model.EditItem.SubjectID, (IEnumerable<CustomSelectListItem>)ViewBag.SubjectID, null, null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.EditItem.SubjectID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.PublishPeriodID, Resources.Administration.PublishPeriod, htmlAttributes: new { @class = "text-info" })
+                    @Html.CustomDropdownListFor(model => model.EditItem.PublishPeriodID, (IEnumerable<CustomSelectListItem>)ViewBag.PublishPeriodID, null, null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.EditItem.PublishPeriodID, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.ImpactFactor, Resources.Administration.ImpactFactor, htmlAttributes: new { @class = "text-info" })
+                    @Html.EditorFor(model => model.EditItem.ImpactFactor, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EditItem.ImpactFactor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.PrintISSN, Resources.Administration.PrintISSN, htmlAttributes: new { @class = "text-info" })
+                    @Html.EditorFor(model => model.EditItem.PrintISSN, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EditItem.PrintISSN, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.OnlineISSN, Resources.Administration.OnlineISSN, htmlAttributes: new { @class = "text-info" })
+                    @Html.EditorFor(model => model.EditItem.OnlineISSN, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EditItem.OnlineISSN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.YearIssue, Resources.Administration.PrintISSN, htmlAttributes: new { @class = "text-info" })
+                    @Html.EditorFor(model => model.EditItem.YearIssue, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EditItem.YearIssue, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.ShortcutCharacter, Resources.Administration.ShortcutCharacter, htmlAttributes: new { @class = "text-info" })
+                    @Html.EditorFor(model => model.EditItem.ShortcutCharacter, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EditItem.ShortcutCharacter, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.About, Resources.Administration.About, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.EditItem.About, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EditItem.About, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.AimsScope, Resources.Administration.AimsScope, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.EditItem.AimsScope, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EditItem.AimsScope, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.ArticleProcessingCharge, Resources.Administration.ArticleProcessingCharge, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.EditItem.ArticleProcessingCharge, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EditItem.ArticleProcessingCharge, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.PublicationEthics, Resources.Administration.PublicationEthics, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.EditItem.PublicationEthics, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EditItem.PublicationEthics, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.EditorialBoard, Resources.Administration.EditorialBoard, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.EditItem.EditorialBoard, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EditItem.EditorialBoard, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.AuthorGuidlines, Resources.Administration.AuthorGuidlines, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.EditItem.AuthorGuidlines, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EditItem.AuthorGuidlines, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.OpenSpecialIssues, Resources.Administration.OpenSpecialIssues, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.EditItem.OpenSpecialIssues, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EditItem.OpenSpecialIssues, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.SpecialIssuesGuidlines, Resources.Administration.SpecialIssuesGuidlines, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.EditItem.SpecialIssuesGuidlines, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EditItem.SpecialIssuesGuidlines, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.ReviewersAcknowledgment, Resources.Administration.ReviewersAcknowledgment, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.EditItem.ReviewersAcknowledgment, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EditItem.ReviewersAcknowledgment, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.EditItem.ConderencePublication, Resources.Administration.ConderencePublication, htmlAttributes: new { @class = "text-info" })
+                    @Html.TextAreaFor(model => model.EditItem.ConderencePublication, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EditItem.ConderencePublication, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Bootstrap().CheckBoxFor(model => model.EditItem.IsBlock).Text(Resources.Resource.Block).HtmlAttributes(new { @class = "colored-danger" })
+            </div>
+        </div>
+        <div>
+            @Html.HiddenFor(model => model.EditItem.CreateUserId)
+            @Html.HiddenFor(model => model.EditItem.CreateDate)
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" value="@Resources.Resource.ButtonSave" class="btn btn-success" />
+        <button class="btn btn-default" type="button" ng-click="cancel()">@Resources.Resource.ButtonCancel</button>
+    </div>
+}
+
+@section scripts {
+    <script>
+    </script>
+}
+

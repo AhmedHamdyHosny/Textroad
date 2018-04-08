@@ -1,0 +1,71 @@
+﻿@model Textroad.Models.ConferenceDetailsViewModel
+
+@{
+    ViewBag.Title = Resources.Administration.ConferenceDetails;
+    Layout = "~/Views/Shared/_Popup.cshtml";
+}
+
+<div class="modal-header">
+    <div class="widget-buttons pull-right">
+        <a href="javascript:void(0);" onclick="popupExpand(this)" data-toggle="maximize">
+            <i class="fa fa-expand"></i>
+        </a>
+        <a href="javascript:void(0);" ng-click="cancel()" data-toggle="dispose">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+    <h2 class="modal-title">@Resources.Administration.ConferenceDetails</h2>
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="modal-body withVScroll">
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.NewsTitle, Resources.Administration.NewsTitle, htmlAttributes: new { @class = "text-info" })
+                <label class="form-control">@(Model.NewsTitle ?? " ")</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.NewsDetails, Resources.Administration.NewsDetails, htmlAttributes: new { @class = "text-info" })
+                <label class="form-control">@(Model.NewsDetails ?? " ")</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.NoViews, Resources.Administration.NoView, htmlAttributes: new { @class = "text-info" })
+                <label class="form-control">@(Model.NoViews.ToString() ?? " ")</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.Block, Resources.Resource.Block, htmlAttributes: new { @class = "text-info" })
+                <label class="form-control">@(Model.Block ?? " ")</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.CreateUser_FullName, Resources.Resource.CreateUserFullNameEn, htmlAttributes: new { @class = "text-info" })
+                @Html.Label(Model.CreateUser_FullName ?? " ", new { @class = "form-control" })
+            </div>
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.CreateDate, Resources.Resource.CreateDateTime, htmlAttributes: new { @class = "text-info" })
+                @Html.Label(Model.CreateDate.ToString(Classes.Common.Constant.DateTimeFormat), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.ModifyUser_FullName, Resources.Resource.ModifyUserFullNameEn, htmlAttributes: new { @class = "text-info" })
+                @Html.Label(Model.ModifyUser_FullName ?? " ", new { @class = "form-control" })
+            </div>
+            <div class="col-xs-6 form-group">
+                @Html.LabelFor(model => model.ModifyDate, Resources.Resource.ModifyDateTime, htmlAttributes: new { @class = "text-info" })
+                @Html.Label(Model.ModifyDate != null ? ((DateTime)Model.ModifyDate).ToString(Classes.Common.Constant.DateTimeFormat) : "", new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" type="button" ng-click="cancel()">@Resources.Resource.ButtonOk</button>
+    </div>
+}
